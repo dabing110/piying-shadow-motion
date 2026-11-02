@@ -1,0 +1,43 @@
+# NOTICE
+
+本仓库采用 MIT License（见 `LICENSE`），但包含来自不同作者的代码，各部分归属如下：
+
+## 引擎底座（第三方，MIT）
+
+`engine/engine.js`、`engine/index.html`、`engine/clip.html`、`engine/clip.js`、`engine/transitions.js` 及 `engine/lib/` 下的全部文件，复制自：
+
+> huashu-art-motion — https://github.com/alchaincyf/huashu-art-motion
+> MIT License © 花叔 Huashu（alchaincyf）
+> 该技能以 MIT 发布（"代码和文档：MIT。随便用，随便改，随便造。"），
+> 本仓库保留其版权与许可声明。
+
+`pipeline/render.py` 源自该技能的 `scripts/engine/render.py`，本仓库的修改：
+静态根目录改为同级 `engine/`（脚本在 `pipeline/` 下）、ffmpeg 走 `FFMPEG_BIN`/PATH。
+
+`pipeline/compare.py`、`pipeline/breakdown_local.py` 亦来自该技能的拆解/比对工具链，
+`breakdown_local.py` 为本机兼容补丁版（ffprobe 在 Windows 上可能是 `.cmd` shim，需 `shell=True`）。
+
+## 字体（第三方，SIL OFL 1.1）
+
+`engine/lib/fonts/` 内各字体沿用各自的 SIL OFL 1.1 许可，清单见同目录 `LICENSES.md`。
+
+## 原创部分（本仓库作者 dabing110）
+
+- 皮件公共库 `engine/scenes/piying_base2.js`（`window.PY`：幕布/人形/四足/鸟/浪/树/屋/操杆/定格步进）
+- 13 部短片场景代码：`engine/scenes/piying_remake.js`、`engine/scenes/oscar_a.js`、`oscar_b.js`、`oscar_c.js`
+- 13 张段落表 `engine/eras_piying.js` … `engine/eras_bear.js`
+- 配音流水线 `voice/build_voice_remake.py`（TTS + 句级时间戳 + ASS 字幕 + 参数化环境音 + ducking）、`voice/ambience.py`（9 类环境音配方）
+- 发布门禁 `voice/prepare_channels_remake.py`（封面生成 / 文案 / manifest 四件套）
+- 旁白与文案 `voice/lines_*.json` × 13、`voice/发布元数据_复刻.json`
+- 方法与交付文档 `docs/`
+
+## 未包含的第三方素材（重要）
+
+原片《皮影》（抖音 @王子源）与 12 部奥斯卡最佳动画短片的**任何音视频、截图、拆解产物、成片、字幕、音轨均未入库**。
+本仓库只包含「用代码重画」的实现与自撰旁白；片名与届次仅在文档中作注释性标注，版权归各原作方。
+
+## 备注
+
+花叔的卡通形象骨架（`rig_huashu.js`）不在 MIT 授权范围内（原技能声明"只用于本 skill 的示范，
+不随 MIT 授权用于其他用途"），**本仓库未包含该文件**，且 `engine/index.html` 中对应的 script 标签已移除。
+本仓库的 13 部短片均未引用它（皮件由 `piying_base2.js` 自建，属刚体剪影，不使用 FK 人形骨架）。
